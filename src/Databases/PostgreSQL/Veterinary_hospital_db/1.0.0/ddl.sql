@@ -50,3 +50,20 @@ create table veterinarian_to_animal_prices(
     price real check(price >= 0.0) default(0.0) not null,
     description varchar(256)
 );
+
+
+
+create or replace function hide_text_right(str varchar, ch char(1), count int)
+returns varchar
+as
+$$
+    begin
+        return left(str, count) || repeat(ch, length(str) - count);
+    end
+$$ language plpgsql
+
+
+select 
+diploma_no, hide_text_right(first_name, '*', 1) as first_name, 
+hide_text_right(middle_name , '*', 1) as middle_name, 
+hide_text_right(last_name , '*', 1) as last_name  from veterinarians

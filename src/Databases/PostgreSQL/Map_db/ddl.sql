@@ -1,3 +1,8 @@
+/*----------------------------------------------------------------------------------------------------------------------
+Sample database for points. Includes coordinates table consists of coordinate values of 2D points and distance function
+returns the distance between two points
+-----------------------------------------------------------------------------------------------------------------------*/
+
 create database mapdb;
 
 create table coordinates (
@@ -13,6 +18,8 @@ returns double precision
 as
 $$
     begin
-        return sqrt(pow(x1-x2, 2) + pow(y1-y2,2));
+        return sqrt(pow(x1 - x2, 2) + pow(y1 - y2, 2));
     end
 $$ language plpgsql;
+
+select x1, y1, x2, y2, distance(x1, y1, x2, y2) as distance from coordinates
